@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class Input {
 
-    public static void InputToList(List<Integer> items){
+    public static int InputToList(List<Integer> items){
 
         Scanner scanner = new Scanner(System.in);
 
         String userInput = scanner.nextLine();
+        int k = scanner.nextInt();
 
         Scanner secondScanner = new Scanner(userInput);
 
@@ -17,6 +18,8 @@ public class Input {
             int singleNumber = secondScanner.nextInt();
             items.add(singleNumber);
         }
+
+        return k;
     }
 
 

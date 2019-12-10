@@ -1,7 +1,6 @@
 package PROGETTO_ASD;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class minHeap {
@@ -27,15 +26,15 @@ public class minHeap {
     }
 
 
-    private int left(int i){
+    public int left(int i){
         return 2*i+1;
     }
 
-    private int right(int i){
+    public int right(int i){
         return 2*i+2;
     }
 
-    private int parent(int i){
+    public int parent(int i){
         return (i-1)/2;
     }
 
