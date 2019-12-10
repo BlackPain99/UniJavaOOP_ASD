@@ -27,7 +27,7 @@ public class IntSet {
     }
 
     /**
-     * @param: elts. REQUIRE be not null. EFFECT initialize this to a new set, which
+     * @param : elts. REQUIRE be not null. EFFECT initialize this to a new set, which
      *         contains each element of elts; duplicated elements are not
      *         considered.
      */
@@ -68,7 +68,7 @@ public class IntSet {
     /**
      * remove x from this MODIFY this: x is removed to this set if x is present
      *
-     * @return: true if x was removed
+     * @return : true if x was removed
      */
     public boolean remove(int x) {
         Integer y = new Integer(x);
@@ -80,7 +80,7 @@ public class IntSet {
     /**
      * check if x belongs to this
      *
-     * @return: true if x is present in this
+     * @return : true if x is present in this
      */
     public boolean isIn(int x) {
         Integer y = new Integer(x);
@@ -91,7 +91,7 @@ public class IntSet {
     }
 
     /**
-     * @return: the index of x if it is present in this ; return -1 if not present
+     * @return : the index of x if it is present in this ; return -1 if not present
      */
     private int indexOf(Integer x) {
         assert (this.elements != null);
@@ -106,7 +106,7 @@ public class IntSet {
     /**
      * cardinality of this
      *
-     * @return: the number of elements in this
+     * @return : the number of elements in this
      */
     public long size() {
         return (this.elements.size());
@@ -115,8 +115,8 @@ public class IntSet {
     /**
      * choose an element of this
      *
-     * @return: a random element in this
-     * @throws: EmptyIntSetException if this is empty
+     * @return : a random element in this
+     * @throws : EmptyIntSetException if this is empty
      */
     public int choose() throws EmptyIntSetException {
         if (this.elements.isEmpty()) {

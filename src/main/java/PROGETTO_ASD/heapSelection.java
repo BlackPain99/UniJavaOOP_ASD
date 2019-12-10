@@ -10,20 +10,25 @@ public class heapSelection {
 
         List<Integer> items = new ArrayList<>();
 
-        Scanner scanner = new Scanner(System.in);
+        Input.InputToList(items);
 
-        String userInput = scanner.nextLine();
+        minHeap H1 = new minHeap(items);
+        minHeap H2 = new minHeap();
 
-        Scanner secondScanner = new Scanner(userInput);
+        int k = 0;
 
-        while(secondScanner.hasNextInt()){
-            int singleNumber = secondScanner.nextInt();
-            items.add(singleNumber);
+        H2.insert(H1.getMin());
+
+        for (int i = 0; i < k-1 ; i++) {
+            H2.extract();
+
+
         }
 
-        String s = items.toString();
-        System.out.println(s);
-        System.out.println(items.size());
+        H1.printMinHeap();
+        System.out.println(H1.getHeapSize());
+
+
 
     }
 }

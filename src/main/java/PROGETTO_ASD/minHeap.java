@@ -14,7 +14,7 @@ public class minHeap {
         return heapSize;
     }
 
-    public List getIntList() {
+    public List<Integer> getIntList() {
         return IntList;
     }
 
@@ -115,8 +115,6 @@ public class minHeap {
         //inserisco elemento key alla fine della minheap
         int i = heapSize - 1;
         IntList.set(i, key);
-
-
 
         //esco quando il genitore è minore del figlio
         while(i > 0 && IntList.get(i) < IntList.get(parent(i))){
