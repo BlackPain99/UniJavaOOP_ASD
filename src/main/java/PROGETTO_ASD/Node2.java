@@ -1,11 +1,11 @@
 package PROGETTO_ASD;
 
-public class Node implements Comparable<Node>{
+class Node2 implements Comparable<Node2>{
 
     private int key; //posizione
     private int val; //valore
 
-    public Node(int key, int val) {
+    public Node2(int key, int val) {
         this.key = key;
         this.val = val;
     }
@@ -39,7 +39,7 @@ public class Node implements Comparable<Node>{
     }
 
     @Override
-    public int compareTo(Node o) {
+    public int compareTo(Node2 o) {
 
         if(this.getVal() < o.getVal()){
             return -1;

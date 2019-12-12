@@ -8,16 +8,18 @@ public class HeapMin {
     private List<Node> heap;
     private int heapsize;
 
-    private class Node implements Comparable<Node> {
+    protected class Node extends Node2 {
 
         private int key; //posizione
         private int val; //valore
 
-        public Node(int key, int val) {
-            this.key = key;
-            this.val = val;
-        }
 
+        public Node(int key, int val) {
+            super(key, val);
+            //this.key = key;
+            //this.val = val;
+        }
+        /**
         public int getKey() {
             return key;
         }
@@ -33,6 +35,19 @@ public class HeapMin {
         public String toString() {
             return "" + val;
         }
+
+        public int parent(int i){
+            return (i-1)/2;
+        }
+
+        public int left(int i){
+            return 2*i+1;
+        }
+
+        public int right(int i){
+            return 2*i+2;
+        }
+         */
 
         public Node getParent() {
             if (key == 0) {
@@ -58,6 +73,7 @@ public class HeapMin {
             return heap.get(rightKey);
         }
 
+        /**
         @Override
         public int compareTo(Node o) {
 
@@ -69,6 +85,15 @@ public class HeapMin {
                 return 1;
             }
         }
+        */
+    }
+
+    public List<Node> getHeap() {
+        return heap;
+    }
+
+    public int getHeapsize() {
+        return heapsize;
     }
 
     /**
@@ -81,6 +106,12 @@ public class HeapMin {
             heap.add(new Node(i, items.get(i)));
         }
         heapsize = heap.size();
+        buildHeap();
+    }
+
+    public HeapMin(){
+        heap = new ArrayList<>();
+        heapsize = 0;
     }
 
     /**
@@ -157,11 +188,12 @@ public class HeapMin {
      * costruisce una minHeap dalla lista di elementi iniziale
      * chiomando ripetutamente heapify, partendo dal primo nodo non foglia fino alla radice
      */
-    public void buildHeap(){
+    private void buildHeap(){
         for (int i = (heapsize - 1)/2; i >= 0 ; i--) {
             heapify(i);
         }
-        heapsize = heap.size();
+        //heapsize = heap.size();
+
     }
 
     /**
@@ -219,7 +251,7 @@ public class HeapMin {
 
     public int extract(){
 
-        if (heapsize == 0){
+        if (heapsize <= 0){
             throw new IllegalStateException("minHeap is empty");
         } else {
 
@@ -238,6 +270,83 @@ public class HeapMin {
 
         return heap.get(heapsize).getVal();
     }
+
+    public Node getMinNode(){
+        if(heapsize <= 0){
+            throw new IllegalStateException("minHeap is empty");
+        } else {
+            return heap.get(0);
+        }
+
+    }
+
+    public void insert2(Node2 n){
+
+        //inserisco elemento key alla fine della minheap
+        heapsize++;
+        int i = heapsize - 1;
+        heap.set(i, (Node) n);
+
+        //esco quando il genitore è minore del figlio
+        while(i > 0 && (heap.get(i).getVal() < heap.get(i).getParent().getVal())){
+            int k = heap.get(i).getParent().getKey();
+            Node tempNode = heap.get(i);
+            heap.set(i, heap.get(i).getParent());
+            heap.set(k, tempNode);
+
+            i = heap.get(i).getParent().getKey();
+        }
+    }
+
+    public Node2 extract2(){
+
+        if (heapsize <= 0){
+            throw new IllegalStateException("minHeap is empty");
+        } else {
+
+            Node firstNode = heap.get(0);
+            Node lastNode = heap.get(heapsize - 1);
+
+            //scambio il primo elemento con l'ultimo
+            heap.set(0, lastNode);
+            heap.set(heapsize - 1, firstNode);
+            heapsize--;
+
+            //correggo
+            heapify2(0);
+        }
+
+        return heap.get(heapsize);
+    }
+
+    public void heapify2(int i){
+
+        Node currNode = heap.get(i);
+        Node leftNode = currNode.getLeft();
+        Node rigthNode = currNode.getRight();
+
+        Node smallest = currNode;
+
+        if((leftNode != null) && (leftNode.getKey() < heapsize) && (leftNode.getVal() < currNode.getVal())){
+            smallest = leftNode;
+        }
+
+        if((rigthNode != null) && (rigthNode.getKey() < heapsize) && (rigthNode.getVal() < smallest.getVal())){
+            smallest = rigthNode;
+        }
+
+        if(smallest != currNode){
+            int key = currNode.getKey();
+            Node tempNode = smallest;
+            heap.set(smallest.getKey(), currNode);
+            heap.set(key,tempNode);
+
+
+            heapify(smallest.getKey());
+        }
+    }
+
+
 
 
 
