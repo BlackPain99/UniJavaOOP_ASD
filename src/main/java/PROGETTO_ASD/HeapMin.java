@@ -8,88 +8,16 @@ public class HeapMin {
     private List<Node> heap;
     private int heapsize;
 
-    protected class Node extends Node2 {
-
-        private int key; //posizione
-        private int val; //valore
-
-
-        public Node(int key, int val) {
-            super(key, val);
-            //this.key = key;
-            //this.val = val;
-        }
-        /**
-        public int getKey() {
-            return key;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public void setVal(int val) {
-            this.val = val;
-        }
-
-        public String toString() {
-            return "" + val;
-        }
-
-        public int parent(int i){
-            return (i-1)/2;
-        }
-
-        public int left(int i){
-            return 2*i+1;
-        }
-
-        public int right(int i){
-            return 2*i+2;
-        }
-         */
-
-        public Node getParent() {
-            if (key == 0) {
-                return null;
-            }
-            int parentKey = (key + 1) / 2 - 1;
-            return heap.get(parentKey);
-        }
-
-        public Node getLeft() {
-            int leftKey = 2 * (key + 1) - 1;
-            if (leftKey >= heap.size()) {
-                return null;
-            }
-            return heap.get(leftKey);
-        }
-
-        public Node getRight() {
-            int rightKey = 2 * (key + 1);
-            if (rightKey >= heap.size()) {
-                return null;
-            }
-            return heap.get(rightKey);
-        }
-
-        /**
-        @Override
-        public int compareTo(Node o) {
-
-            if (this.getVal() < o.getVal()) {
-                return -1;
-            } else if (this.getVal() == o.getVal()) {
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-        */
-    }
-
     public List<Node> getHeap() {
         return heap;
+    }
+
+    public void setHeap(List<Node> heap) {
+        this.heap = heap;
+    }
+
+    public void setHeapsize(int heapsize) {
+        this.heapsize = heapsize;
     }
 
     public int getHeapsize() {
@@ -110,7 +38,7 @@ public class HeapMin {
     }
 
     public HeapMin(){
-        heap = new ArrayList<>();
+        heap = new ArrayList<Node>();
         heapsize = 0;
     }
 
@@ -121,8 +49,8 @@ public class HeapMin {
     public void heapify(int i){
 
         Node currNode = heap.get(i);
-        Node leftNode = currNode.getLeft();
-        Node rigthNode = currNode.getRight();
+        Node leftNode = currNode.getLeft(heap);
+        Node rigthNode = currNode.getRight(heap);
 
         Node smallest = currNode;
 
@@ -153,7 +81,7 @@ public class HeapMin {
     public int swapWithParent(int key){
 
         Node node = heap.get(key);
-        Node parent = node.getParent();
+        Node parent = node.getParent(heap);
 
         if(parent == null){
             return 0; //raggiuta la radice
@@ -231,16 +159,16 @@ public class HeapMin {
             Node node = heap.get(i);
             res.append(i + " [Node " + node.toString());
 
-            if(node.getParent() != null && node.getParent().getKey() < heapsize){
-                res.append(" Parent " + node.getParent().getVal());
+            if(node.getParent(heap) != null && node.getParent(heap).getKey() < heapsize){
+                res.append(" Parent " + node.getParent(heap).getVal());
             }
 
-            if(node.getLeft() != null && node.getLeft().getKey() < heapsize){
-                res.append(" Left " + node.getLeft().getVal());
+            if(node.getLeft(heap) != null && node.getLeft(heap).getKey() < heapsize){
+                res.append(" Left " + node.getLeft(heap).getVal());
             }
 
-            if(node.getRight() != null && node.getRight().getKey() < heapsize){
-                res.append(" Right " + node.getRight().getVal());
+            if(node.getRight(heap) != null && node.getRight(heap).getKey() < heapsize){
+                res.append(" Right " + node.getRight(heap).getVal());
             }
 
             res.append("]\n");
@@ -280,25 +208,37 @@ public class HeapMin {
 
     }
 
-    public void insert2(Node2 n){
+    public void insert2(Node n){
 
-        //inserisco elemento key alla fine della minheap
         heapsize++;
-        int i = heapsize - 1;
-        heap.set(i, (Node) n);
+        heap.add(n);
 
-        //esco quando il genitore è minore del figlio
-        while(i > 0 && (heap.get(i).getVal() < heap.get(i).getParent().getVal())){
-            int k = heap.get(i).getParent().getKey();
-            Node tempNode = heap.get(i);
-            heap.set(i, heap.get(i).getParent());
-            heap.set(k, tempNode);
+        int key = heapsize - 1;
+        do{
+            key = swapWithParent2(key);
+        } while (key > 0);
 
-            i = heap.get(i).getParent().getKey();
-        }
     }
 
-    public Node2 extract2(){
+    public int swapWithParent2(int key){
+
+        Node node = heap.get(key);
+        Node parent = node.getParent(heap);
+
+        if(parent == null){
+            return 0; //raggiuta la radice
+        }
+
+        if(node.getVal() < parent.getVal()){
+            heap.set(key, parent);
+            heap.set((key + 1) / 2 - 1, node);
+            return heap.indexOf(parent);
+        }
+
+        return -1; //la posizione del figlio è giusta
+    }
+
+    public Node extract2(){
 
         if (heapsize <= 0){
             throw new IllegalStateException("minHeap is empty");
@@ -322,8 +262,8 @@ public class HeapMin {
     public void heapify2(int i){
 
         Node currNode = heap.get(i);
-        Node leftNode = currNode.getLeft();
-        Node rigthNode = currNode.getRight();
+        Node leftNode = currNode.getLeft(heap);
+        Node rigthNode = currNode.getRight(heap);
 
         Node smallest = currNode;
 
@@ -336,13 +276,12 @@ public class HeapMin {
         }
 
         if(smallest != currNode){
-            int key = currNode.getKey();
-            Node tempNode = smallest;
-            heap.set(smallest.getKey(), currNode);
-            heap.set(key,tempNode);
+            int key = heap.indexOf(smallest);
+            heap.set(i, smallest);
+            heap.set(key,currNode);
 
 
-            heapify(smallest.getKey());
+            heapify2(key);
         }
     }
 
