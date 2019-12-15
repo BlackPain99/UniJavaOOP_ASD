@@ -250,6 +250,7 @@ public class HeapMin {
             //scambio il primo elemento con l'ultimo
             heap.set(0, lastNode);
             heap.set(heapsize - 1, firstNode);
+            heap.remove(firstNode);
             heapsize--;
 
             //correggo

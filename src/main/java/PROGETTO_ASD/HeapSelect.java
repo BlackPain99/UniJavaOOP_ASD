@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class Selection {
+public class HeapSelect {
 
     public static void main(String[] args) {
 
@@ -13,7 +13,7 @@ public class Selection {
         int k = Input.InputToList(items);
 
         int kSmallestV1 = heapSelectV1(items, k);
-        int kSmallestV2 = heapSelect(items, k);
+        int kSmallestV2 = heapSelectV2(items, k);
 
         System.out.println(kSmallestV1);
         System.out.println(kSmallestV2);
@@ -49,7 +49,7 @@ public class Selection {
 
     }
 
-    public static int heapSelect(List<Integer> items, int k){
+    public static int heapSelectV2(List<Integer> items, int k){
 
         HeapMin H1 = new HeapMin(items);
 
@@ -60,16 +60,18 @@ public class Selection {
             //int key = H2.getMinNode().getKey();
 
             Node deletedNode = H2.extract2();
-            int key = deletedNode.getKey();
 
-            Node left = H1.getHeap().get(key).getLeft(H1.getHeap());
-            Node right = H1.getHeap().get(key).getRight(H1.getHeap());
+            Node left = deletedNode.getLeft(H1.getHeap());
+            Node right = deletedNode.getRight(H1.getHeap());
 
-            if(left.getKey() < H1.getHeapsize()){
+            if(left == null && right == null)
+                break;
+
+            if(left != null && left.getKey() < H1.getHeapsize()){
                 H2.insert2(left);
             }
 
-            if(right.getKey() < H1.getHeapsize()){
+            if(right != null && right.getKey() < H1.getHeapsize()){
                 H2.insert2(right);
             }
         }
