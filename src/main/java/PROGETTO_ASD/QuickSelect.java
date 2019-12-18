@@ -42,7 +42,7 @@ public class QuickSelect {
 
 
 
-    public static int partition(int[] items, int low, int high){
+    private static int partition(int[] items, int low, int high){
 
         int pivot = items[high];
         int i = (low - 1);

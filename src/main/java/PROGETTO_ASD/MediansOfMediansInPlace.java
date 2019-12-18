@@ -20,14 +20,13 @@ public class MediansOfMediansInPlace {
     }
 
 
-    private static void swap(int[] arr, int i, int index){
-        if(arr[i] != arr[index]) {
-            int temp = arr[i];
-            arr[i] = arr[index];
-            arr[index] = temp;
-        }
-    }
-
+    /**
+     * trova la posizione della mediana delle mediane (miglior pivot)
+     * @param arr array in cui cercare il pivot
+     * @param left posizone iniziale per la ricerca
+     * @param right posizione finale per la ricerca
+     * @return la posizione della mediana delle mediane (miglior pivot)
+     */
     private static int findPivot(int[] arr, int left, int right){
         int tempRight, medianSingleBlock, mediansOfMedians;
 
@@ -56,6 +55,14 @@ public class MediansOfMediansInPlace {
         return medianOfMediansSelect(arr, left, left + (right - left)/5, mediansOfMedians);
     }
 
+    /**
+     * trova l'n-esimo elemento più piccolo dell'array
+     * @param arr array in cui effettuare la ricerca
+     * @param left posizone iniziale per la ricerca
+     * @param right posizione finale per la ricerca
+     * @param n n-esimo elemento
+     * @return l'n-esimo elemento più piccolo dell'array
+     */
     private static int medianOfMediansSelect(int[] arr, int left, int right, int n) {
         int pivotIndex;
 
@@ -107,6 +114,7 @@ public class MediansOfMediansInPlace {
         //sposto il pivot nella sua posizione finale
         swap(arr, right, storeIndexEq);
 
+        //ritorna la locazione del pivot in base alla desiderata locazione n
         if(n < storeIndex){
             //n è nel gruppo degli elementi piu piccoli del pivot
             return storeIndex;
@@ -119,7 +127,14 @@ public class MediansOfMediansInPlace {
         }
     }
 
-    //seleziona la posizone della mediana di un gruppo di al max 5 elementi (con insertion sort)
+
+    /**
+     * ritorna la posizione della mediana di un gruppo di al max 5 elementi (con insertion sort)
+     * @param arr array in cui cercare la mediana
+     * @param left posizione di partenza della ricerca
+     * @param right posizione di arrivo della ricerca
+     * @return
+     */
     private static int findPosMedian(int[] arr, int left, int right) {
 
         int i = left + 1;
@@ -157,6 +172,20 @@ public class MediansOfMediansInPlace {
         }
 
         return i;
+    }
+
+    /**
+     * scambia l'elemento in arr in posizione i con quello in posizione index
+     * @param arr array in cui avviene lo scambio
+     * @param i indice del primo elemento
+     * @param index indice del secondo elemento
+     */
+    private static void swap(int[] arr, int i, int index){
+        if(arr[i] != arr[index]) {
+            int temp = arr[i];
+            arr[i] = arr[index];
+            arr[index] = temp;
+        }
     }
 
 
