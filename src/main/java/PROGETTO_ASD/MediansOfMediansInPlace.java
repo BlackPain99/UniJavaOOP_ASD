@@ -21,7 +21,8 @@ public class MediansOfMediansInPlace {
 
 
     /**
-     * trova la posizione della mediana delle mediane (miglior pivot)
+     * trova la posizione della mediana delle mediane (miglior pivot).
+     * E'in mutua ricorsione con medianOfMediansSelect
      * @param arr array in cui cercare il pivot
      * @param left posizone iniziale per la ricerca
      * @param right posizione finale per la ricerca
@@ -83,6 +84,18 @@ public class MediansOfMediansInPlace {
         return arr[left];
     }
 
+    /**
+     * divide l'array in 3 parti (conveniente in caso di elementi ripetuti):
+     * -quella in cui ci sono solo elementi minori del pivot
+     * -quella in cui ci sono solo elementi uguali al pivot
+     * -quella in cui ci sono solo elementi più grandi del pivot
+     * @param arr array in cui effettuare la ricerca
+     * @param left posizone iniziale per la ricerca
+     * @param right posizione finale per la ricerca
+     * @param pivotIndex posizone del pivot nell'array (non ordinato)
+     * @param n posizione da cercare
+     * @return posizione finale del pivot in base alla posizione indicata da n
+     */
     private static int partition(int[] arr, int left, int right, int pivotIndex, int n) {
 
         int pivotValue = arr[pivotIndex];
@@ -129,11 +142,12 @@ public class MediansOfMediansInPlace {
 
 
     /**
-     * ritorna la posizione della mediana di un gruppo di al max 5 elementi (con insertion sort)
+     * ritorna la posizione della mediana di un gruppo di al max 5 elementi (con insertion sort).
+     * riodina arr da left a right
      * @param arr array in cui cercare la mediana
      * @param left posizione di partenza della ricerca
      * @param right posizione di arrivo della ricerca
-     * @return
+     * @return arr ordinato da left a right e la posizione della mediana
      */
     private static int findPosMedian(int[] arr, int left, int right) {
 
