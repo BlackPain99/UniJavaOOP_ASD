@@ -1,4 +1,4 @@
-package org.OOP.DECORATOR;
+package org.OOP.DESIGN_PATTERNS.DECORATOR;
 
 public class Hamburger extends Consumation {
 
