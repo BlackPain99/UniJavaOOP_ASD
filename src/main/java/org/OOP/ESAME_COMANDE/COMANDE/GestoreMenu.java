@@ -1,4 +1,6 @@
-package org.OOP.ESAME_COMANDE;
+package org.OOP.ESAME_COMANDE.COMANDE;
+
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.CodiceAlimentoInesistente;
 
 /**
  * Rappresenta il gestore del menù di pietanze e delle loro variazioni.

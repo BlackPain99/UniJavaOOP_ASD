@@ -1,4 +1,7 @@
-package org.OOP.ESAME_COMANDE;
+package org.OOP.ESAME_COMANDE.COMANDE;
+
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.ComandaNonAperta;
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.TavoloNonGestito;
 
 import java.util.*;
 

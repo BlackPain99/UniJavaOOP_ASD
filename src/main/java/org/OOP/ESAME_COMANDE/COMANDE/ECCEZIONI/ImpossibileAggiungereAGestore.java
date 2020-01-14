@@ -1,4 +1,4 @@
-package org.OOP.ESAME_COMANDE;
+package org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI;
 
 /**
  * Eccezione generica nel caso di impossibilità di aggiunta di un

@@ -1,4 +1,6 @@
-package org.OOP.ESAME_COMANDE;
+package org.OOP.ESAME_COMANDE.COMANDE;
+
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.ImpossibileAggiungereAGestore;
 
 /**
  * Rappresenta un'entità che esegue operazioni su un insieme di elementi.

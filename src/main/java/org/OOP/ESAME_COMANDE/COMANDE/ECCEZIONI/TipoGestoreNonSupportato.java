@@ -1,4 +1,4 @@
-package org.OOP.ESAME_COMANDE;
+package org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI;
 
 /**
  * Eccezione lanciata nel caso di creazione di un gestore

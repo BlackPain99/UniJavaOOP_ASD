@@ -1,6 +1,12 @@
-package org.OOP.ESAME_COMANDE;
+package org.OOP.ESAME_COMANDE.COMANDE;
+
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.CodiceAlimentoInesistente;
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.ComandaNonAperta;
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.TavoloNonGestito;
+import org.OOP.ESAME_COMANDE.COMANDE.ECCEZIONI.TipoGestoreNonSupportato;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,9 +22,9 @@ public class Applicazione {
     /**
      * Costruttore (Creator).
      * Dato un insieme di tavoli da gestire, costruisce una nuova applicazione.
-     * @param numerotavoli l'insieme dei tavoli da gestire.
+     * @param numeriTavoli l'insieme dei tavoli da gestire.
      */
-    public Applicazione(List<Integer> numerotavoli){
+    public Applicazione(List<Integer> numeriTavoli){
         try{
             //design-pattern "Factory"
             gestoreComande = (GestoreComande) ProduttoreGestori.getProduttore(Gestori.COMANDE).produci();
@@ -27,7 +33,7 @@ public class Applicazione {
             Logger.getLogger(this.getClass().getName()).log(Level.WARNING,"Tipo gestore non supportato");
         }
 
-        if(numerotavoli != null){
+        if(numeriTavoli != null){
             numeriTavoli.forEach(n -> gestoreComande.aggiungiTavolo(n));
         }
 
@@ -101,7 +107,7 @@ public class Applicazione {
      * Aggiunge una pietanza ad una comanda.
      * (Mutator)
      * @param pietanza pietanza da aggiungere
-     * @param numeroTavoloo numero del tavolo della comanda
+     * @param numeroTavolo numero del tavolo della comanda
      * @throws ComandaNonAperta se per il tavolo non sono state aperte comande
      */
     public void aggiungiAComanda(Pietanza pietanza, Integer numeroTavolo) throws ComandaNonAperta{
@@ -139,6 +145,7 @@ public class Applicazione {
      * @return L'elenco delle pietanze ordinate ma non consegnate suddivise per tavolo
      */
     public Map<Integer, List<Pietanza>> estraiNonConsegnati(){
+
         return gestoreComande.estraiNonConsegnati();
     }
 
