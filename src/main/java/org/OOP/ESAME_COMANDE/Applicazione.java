@@ -1,6 +1,7 @@
 package org.OOP.ESAME_COMANDE;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +29,7 @@ public class Applicazione {
         }
 
         if(numerotavoli != null){
-            numeriTavoli.forEach(n -> gestoreComande.aggiungiTavolo(n));
+            numerotavoli.forEach(n -> gestoreComande.aggiungiTavolo(n));
         }
 
     }
@@ -101,7 +102,7 @@ public class Applicazione {
      * Aggiunge una pietanza ad una comanda.
      * (Mutator)
      * @param pietanza pietanza da aggiungere
-     * @param numeroTavoloo numero del tavolo della comanda
+     * @param numeroTavolo numero del tavolo della comanda
      * @throws ComandaNonAperta se per il tavolo non sono state aperte comande
      */
     public void aggiungiAComanda(Pietanza pietanza, Integer numeroTavolo) throws ComandaNonAperta{

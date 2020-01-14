@@ -13,17 +13,16 @@ public class HeapSelect {
         int k = Input.InputToList(items);
 
         int kSmallestV1 = heapSelectV1(items, k);
-        int kSmallestV2 = heapSelectV2(items, k);
+        //int kSmallestV2 = heapSelectV2(items, k);
 
         System.out.println(kSmallestV1);
-        System.out.println(kSmallestV2);
+        //System.out.println(kSmallestV2);
 
     }
 
     public static int heapSelectV1(List<Integer> items, int k) {
 
-        minHeap H1 = new minHeap(items);
-        //minHeap H2 = new minHeap();
+        MinHeap H1 = new MinHeap(items);
 
         PriorityQueue<Node> H2 = new PriorityQueue<>();
 

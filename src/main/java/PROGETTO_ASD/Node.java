@@ -1,8 +1,10 @@
+/*
 package PROGETTO_ASD;
+
 
 import java.util.List;
 
-class Node implements Comparable<Node> {
+public class Node implements Comparable<Node> {
 
     private int key; //posizione
     private int val; //valore
@@ -78,3 +80,5 @@ class Node implements Comparable<Node> {
         }
     }
 }
+
+*/
