@@ -1,9 +1,11 @@
-package PROGETTO_ASD;
+package PROGETTO_ASD.MEDIAN_OF_MEDIANS;
+
+import PROGETTO_ASD.Input;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MediansOfMediansInPlace {
+public class MediansOfMediansInPlace2 {
 
     public static void main(String[] args) {
         List<Integer> listItems = new ArrayList<>();

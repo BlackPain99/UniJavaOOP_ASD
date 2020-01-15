@@ -5,7 +5,7 @@ import PROGETTO_ASD.Input;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MediansOfMedians {
+public class MediansOfMediansInPlace {
 
     public static void main(String[] args) {
         List<Integer> listItems = new ArrayList<>();
@@ -17,13 +17,13 @@ public class MediansOfMedians {
             items[i] = listItems.get(i);
         }
 
-        int result = (Integer) MediansOfMedians.mediansOfMedians(items, key-1);
+        int result = (Integer) MediansOfMediansInPlace.mediansOfMediansInPlace(items, key-1);
 
         System.out.println(result);
 
     }
 
-    public static Comparable mediansOfMedians(Comparable[] nums, int k){
+    public static Comparable mediansOfMediansInPlace(Comparable[] nums, int k){
         return nums[select(nums, 0, nums.length - 1, k)];
     }
 
