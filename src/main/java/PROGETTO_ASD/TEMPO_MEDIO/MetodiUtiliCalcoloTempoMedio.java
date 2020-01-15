@@ -31,53 +31,6 @@ public class MetodiUtiliCalcoloTempoMedio {
         return (end - start);
     }
 
-    public int getTaraRip(long tMin){
-        //Restituisce le ripetizioni minime per la tara
-
-        long t0 = 0;
-        long t1 = 0;
-
-        int rip = 1;
-
-        while(t1 - t0 <= tMin){
-
-            //stima di rip con crescita esponenziale
-            rip = 2 * rip;
-            t0 = System.currentTimeMillis();
-
-            for(int i = 1; i <= rip; i++){
-                copy();
-            }
-
-            t1 = System.currentTimeMillis();
-        }
-
-        //ricerca esatta del numero di ripetizioni per bisezione
-        //approssimare a 5 cicli
-
-        int max = rip;
-        int min = rip / 2;
-
-        while(max - min >= cicliErrati){
-
-            rip = (max + min) / 2;
-            t0 = System.currentTimeMillis();
-
-            for(int i = 1; i <= rip; i++){
-                copy();
-            }
-
-            t1 = System.currentTimeMillis();
-
-            if(t1 - t0 <= tMin){
-                min = rip;
-            } else {
-                max = rip;
-            }
-        }
-
-        return max;
-    }
 
 
 }
