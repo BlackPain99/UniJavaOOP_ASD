@@ -22,6 +22,7 @@ public class MediansOfMediansSelect {
 
     public static int mediansOfMediansSelect(int[] arr, int low, int high, int k){
 
+        
         if(k > 0 && k <= high - low + 1){
 
             //numeri di elementi nell'array
@@ -86,9 +87,16 @@ public class MediansOfMediansSelect {
         return i;
     }
 
+    //find median of arr[]. This is called only for an array of size 5 in this program.
+    private static int getMedian(int[] arr,int i, int n) {
 
-    private static int getMedian(int[] arr, int n) {
-        Arrays.sort(arr);
+        if(i <= n){
+            Arrays.sort(arr, i, n);
+        } else {
+            Arrays.sort(arr, n, i);
+        }
+
+        // Return middle element
         return arr[n / 2];
     }
 

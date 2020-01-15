@@ -64,7 +64,7 @@ public class MediansOfMediansInPlace {
      * @param n n-esimo elemento
      * @return l'n-esimo elemento più piccolo dell'array
      */
-    private static int medianOfMediansSelect(int[] arr, int left, int right, int n) {
+    public static int medianOfMediansSelect(int[] arr, int left, int right, int n) {
         int pivotIndex;
 
         while(left != right){
