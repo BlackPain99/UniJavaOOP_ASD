@@ -1,7 +1,5 @@
 package org.OOP.ESAME_TAXI.TAXI;
 
-import sun.jvm.hotspot.debugger.win32.coff.COFFException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

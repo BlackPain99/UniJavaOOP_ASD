@@ -33,7 +33,6 @@ interface GestoreConCodice<T> {
 
     /**
      * Verifica la presenza di un oggetto di cui viene fornito il codice.
-     * Verifica la presenza di un oggetto di cui viene fornito il codice
      * @param codice codice dell'elemento da cercare
      * @return true se l'oggetto risulta tra quelli gestiti, falso altrimenti
      */
