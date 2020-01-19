@@ -1,4 +1,4 @@
-package org.OOP.TAXI_PARTIAL;
+package org.OOP.ESAME_TAXI.TAXI;
 
 public enum StatiPrenotazione {
     ACCETTATA,
