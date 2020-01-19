@@ -1,5 +1,7 @@
 package org.OOP.ESAME_TAXI.TAXI;
 
+import org.OOP.ESAME_TAXI.ECCEZIONI.ArgomentiMancanti;
+
 import java.util.Calendar;
 
 class Persona {
@@ -9,7 +11,7 @@ class Persona {
     private Calendar dataDiNascita;
     private String cellulare;
 
-    public Persona(String nome, String cognome, Calendar data) throws ArgomentiMancanti{
+    public Persona(String nome, String cognome, Calendar data) throws ArgomentiMancanti {
 
         if(nome == null || cognome== null || data == null) {
             throw new ArgomentiMancanti("nome, cognome o data di nascita");

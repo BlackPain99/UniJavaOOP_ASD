@@ -1,5 +1,7 @@
 package org.OOP.ESAME_TAXI.TAXI;
 
+import org.OOP.ESAME_TAXI.ECCEZIONI.ArgomentiMancanti;
+
 import java.util.Calendar;
 
 class Viaggio {
@@ -8,7 +10,7 @@ class Viaggio {
     private Luogo destinazione;
     private Calendar oraPartenza;
 
-    public Viaggio(Luogo partenza, Luogo destinazione, Calendar oraPartenza) throws ArgomentiMancanti{
+    public Viaggio(Luogo partenza, Luogo destinazione, Calendar oraPartenza) throws ArgomentiMancanti {
 
         if(partenza == null || destinazione == null || oraPartenza == null){
             throw new ArgomentiMancanti("partenza, destinazione o ora partenza");

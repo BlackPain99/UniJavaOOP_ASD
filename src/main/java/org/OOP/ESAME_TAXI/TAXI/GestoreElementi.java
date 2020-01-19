@@ -3,6 +3,18 @@ package org.OOP.ESAME_TAXI.TAXI;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Rappresenta un gestore di un elemento T.
+ *
+ * STATO ASTRATTO: insieme di elementi da gestire
+ * STATO CONCRETO: Lista (ArrayList) di elementi di classe T
+ * PROTOCOLLO:
+ * - aggiungi (aggiunta di un elemento): modificatore dello stato
+ * - rimuovi (rimozione di un elemento)
+ * - ePresente (verifica presenza di un elemento)
+ * - getComponenti (lista dei componenti gestiti)
+ * @param <T> la classe di elementi da gestire
+ */
 class GestoreElementi<T> implements GestoreConCodice<T> {
 
     private List<T> elementi = new ArrayList<T>();
