@@ -27,7 +27,7 @@ class Ordine implements Iterable<PietanzaOrdinata> {
 
     /**
      * Costruttore (Creator).
-     * Costruisce un nuovo ordine con una pietanza associato ad un tavolo
+     * Costruisce un nuovo ordine con una pietanza associata ad un tavolo
      * POST-CONDIZIONE: l'ordine contiene almeno una pietanza
      * @param pietanza
      * @param numeroTavolo
@@ -131,7 +131,7 @@ class Ordine implements Iterable<PietanzaOrdinata> {
     }
 
     /**
-     *  Valuta se l'ordine contiene o meno una pietanza (Observer).
+     * Valuta se l'ordine contiene o meno una pietanza (Observer).
      * @param pietanza la pietanza di cui verificare l'esistenza
      * @return  true se la pietanza è contenuta.
      */

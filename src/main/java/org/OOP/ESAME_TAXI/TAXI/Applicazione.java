@@ -20,7 +20,7 @@ public class Applicazione {
     private GestoreConCodice<Guidatore> registroGuidatori;
     private GestoreConCodice<Persona> registroPasseggeri;
     private GestoreConCodice<Taxi> registroTaxi;
-    private final TaxiBuilder taxiBuilder; //final: una volta impostato il vaolore non si potrà cambiare
+    private final TaxiBuilder taxiBuilder; //final: una volta impostato il valore non si potrà cambiare
     private final TaxiFactory taxiFactory;
     private GestoreCorse registroCorse;
 

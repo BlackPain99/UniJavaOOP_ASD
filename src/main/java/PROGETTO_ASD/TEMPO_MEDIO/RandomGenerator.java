@@ -5,6 +5,8 @@ public class RandomGenerator {
 
     private double seed;
 
+    //costruttore
+    //genera un'istanza di RandomGenerator a partire dal seme iniziale s
     public RandomGenerator(double s){
         seed = s;
     }
@@ -44,6 +46,7 @@ public class RandomGenerator {
     }
 
     //esempio: stampa 10 numeri casuali compresi tra 1 e 100
+    //Math.round ritorna il long più vicino al numero
     public static void main(String[] args) {
 
         long n, i;
