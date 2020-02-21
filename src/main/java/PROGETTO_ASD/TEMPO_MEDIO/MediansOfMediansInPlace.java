@@ -1,6 +1,7 @@
 package PROGETTO_ASD.TEMPO_MEDIO;
 
 public class MediansOfMediansInPlace extends Select {
+
     @Override
     public String getName() {
         return "MediansOfMediansInPlace";
@@ -12,7 +13,7 @@ public class MediansOfMediansInPlace extends Select {
     }
 
 
-    public static int mediansOfMediansInPlace(int[] nums, int k){
+    static int mediansOfMediansInPlace(int[] nums, int k){
         return nums[select(nums, 0, nums.length - 1, k)];
     }
 

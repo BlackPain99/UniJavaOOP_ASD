@@ -14,7 +14,7 @@ public class MediansOfMediansSelect extends Select {
         return mediansOfMediansSelect(input, 0, input.length - 1, k) ;
     }
 
-    public static int mediansOfMediansSelect(int[] arr, int low, int high, int k){
+    static int mediansOfMediansSelect(int[] arr, int low, int high, int k){
 
 
         if(k > 0 && k <= high - low + 1){

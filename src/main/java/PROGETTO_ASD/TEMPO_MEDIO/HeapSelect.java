@@ -13,15 +13,15 @@ public class HeapSelect extends Select {
     @Override
     public int execute(int[] input, int k) {
 
-        List<Integer> items = new ArrayList<>();
-        for (int i = 0; i < input.length ; i++) {
-            items.add(input[i]);
-        }
-
-        return heapSelectV1(items, k);
+        return heapSelectV1(input, k);
     }
 
-    public static int heapSelectV1(List<Integer> items, int k) {
+    static int heapSelectV1(int[] input, int k) {
+
+        List<Integer> items = new ArrayList<>();
+        for (int i = 0; i < input.length; i++) {
+            items.add(input[i]);
+        }
 
         MinHeap H1 = new MinHeap(items);
 
