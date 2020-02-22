@@ -98,16 +98,118 @@ public class Tester {
             System.out.print(" " + select[i].getName());
         }
         System.out.println("");
+        
+        /**Tara**/
+        //Calcolo la tara degli input
+        inputTaraRip = new int[inputDimension.length];
+        inputTaraTime = new long[inputDimension.length];
 
+        for (int i = 0; i < inputDimension.length; i++) {
+            System.out.print("Calcolo della tara per la dimensione " + inputDimension[i] + "...");
 
+            Input input = new Input(rndGen, inputDimension[i]);
 
+            inputTaraRip[i] = input.getTaraRip(tMin);
+            System.out.print(" rip = " + inputTaraRip[i]);
 
+            inputTaraTime[i] = input.getTaraTime(inputTaraRip[i]);
+            System.out.println(" time = " + inputTaraTime[i]);
+        }
 
+        System.out.println("");
+        System.out.println("* Tabella tara");
+        System.out.println("idx\tdim\ttaraRip\ttaraTime");
 
+        for (int i = 0; i < inputDimension.length; i++) {
+            System.out.println(i + "\t" + inputDimension[i] + "\t" + inputTaraRip[i] + "\t" + inputTaraTime[i]);
+        }
 
+        /**Algoritmi**/
+        System.out.println("");
+        System.out.println("* Tabella esecuzione algoritmi");
+        System.out.println("idxAlg\tidxDim\tAlg.\tDim.\t1°ripLordo\ttLordo\ttLordo^2\ttMedio\tDelta\tTime");
 
+        for (int alg = 0; alg < select.length; alg++) {
 
+            /**Dimensioni**/
+            for (int dim = 0; dim < inputDimension.length; dim++) {
+                System.out.print(alg);
+                System.out.print("\t" + dim);
+                System.out.print("\t" + select[alg].getName());
+                System.out.print("\t" + inputDimension[dim]);
 
+                //istanzio e azzero tLordo
+                double tLordo = 0;
+                double tLordoQuadrato = 0;
+
+                long totInputTime = System.currentTimeMillis();
+
+                /**Input diversi eseguiti ripLordo volte**/
+                for (int nInput = 0; nInput < totInput; nInput++) {
+
+                    //Genero input
+                    Input input = new Input(rndGen, inputDimension[dim]);
+
+                    //Calcolo ripLordo
+                    int ripLordo = select[alg].getRipLordo(tMin, input);
+
+                    if (nInput == 0){
+                        System.out.print("\t" + ripLordo);
+                    }
+
+                    //Aggiungo il tempo lordo impiegato a tLordo
+                    double tAlg = select[alg].executeTest(input, ripLordo);
+                    tLordo = tLordo + tAlg;
+                    tLordoQuadrato = tLordoQuadrato + (tAlg * tAlg);
+                }
+
+                tLordo = tLordo / totInput;
+                tLordoQuadrato = tLordoQuadrato / totInput;
+                System.out.print("\t" + tLordo);
+                System.out.print("\t" + tLordoQuadrato);
+
+                //tMedio
+                double tMedio = (tLordo - ((double) inputTaraTime[dim] / (double) inputTaraRip[dim]));
+                System.out.print("\t" + tMedio);
+
+                //Delta
+                double Delta = (1 / Math.sqrt(totInput) * deltaConst * (Math.sqrt(tLordoQuadrato - (tMedio * tMedio))));
+                System.out.print("\t" + Delta);
+
+                System.currentTimeMillis();
+                System.out.print("\t" + (System.currentTimeMillis() - totInputTime));
+                System.out.println("");
+            }
+        }
+
+        //Fine
+        System.out.println("");
+        System.out.println("< Terminato (" + (System.currentTimeMillis() - startTime) + "ms");
+    }
+
+    public static void Test(int seed){
+        System.out.println("");
+        System.out.println("Test started with seed " + seed);
+
+        rndGen = new RandomGenerator(seed);
+
+        Input input = new Input(rndGen, 1000);
+        int k = input.getK();
+        int[] vect = input.copy();
+
+        System.out.print("before: ");
+        showVect(vect);
+
+        Select alg = new HeapSelect();
+        System.out.print("executing " + alg.getName() + "...");
+
+        long t0 = System.currentTimeMillis();
+        alg.execute(vect, k);
+        long t1 = System.currentTimeMillis();
+        System.out.println(" done in " + (t1-t0) + "ms");
+
+        System.out.print("after: ");
+        showVect(vect);
 
     }
 

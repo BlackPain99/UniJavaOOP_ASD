@@ -31,7 +31,10 @@ public class Input {
         this.k = k;
     }
 
-    //restituisce un input in formato int[] duplicato da quello rappresentato dalla classe
+
+    /**
+     * @return un input in formato int[] duplicato da quello rappresentato dalla classe
+     */
     public int[] copy() {
 
         int[] ret = new int[inputVector.length];
@@ -43,8 +46,11 @@ public class Input {
     }
 
 
-    //restituisce il tempo di tara per questo input
-    //tareRip rappresenta il numero di ripetizioni minime per la tara
+    /**
+     * restituisce il tempo di tara per questo input
+     * @param tareRip rappresenta il numero di ripetizioni minime per la tara
+     * @return tempo di tara per questo input
+     */
     public long getTaraTime(int tareRip) {
 
         long t0 = System.currentTimeMillis();
@@ -59,10 +65,13 @@ public class Input {
     }
 
 
-    //Restituisce le ripetizioni minime per la tara (tratto dallo pseudocodice del professore Alberto Policriti
-    //tMin rappresenta la durata minima che le ripetizioni devono assicurare al sistema
-    //(affinchè la si possa misurare con l'orologio di sistema)
 
+    /**
+     * Restituisce le ripetizioni minime per la tara (tratto dallo pseudocodice del professore Alberto Policriti)
+     * (affinchè la si possa misurare con l'orologio di sistema)
+     * @param tMin rappresenta la durata minima che le ripetizioni devono assicurare al sistema
+     * @return ripetizioni minime per la tara
+     */
     public int getTaraRip(long tMin){
 
         long t0 = 0;
