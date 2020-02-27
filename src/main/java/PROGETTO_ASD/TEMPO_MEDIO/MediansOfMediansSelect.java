@@ -6,7 +6,7 @@ public class MediansOfMediansSelect extends Select {
 
     @Override
     public String getName() {
-        return "MediansOfMediansSelect";
+        return "MedOfMedSelect";
     }
 
     @Override

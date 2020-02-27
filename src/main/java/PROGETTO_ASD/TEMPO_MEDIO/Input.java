@@ -47,7 +47,7 @@ public class Input {
 
 
     /**
-     * restituisce il tempo di tara per questo input
+     * restituisce il tempo necessario ad eseguire tareRip volte l'operazione copy sull' input
      * @param tareRip rappresenta il numero di ripetizioni minime per la tara
      * @return tempo di tara per questo input
      */
@@ -67,10 +67,10 @@ public class Input {
 
 
     /**
-     * Restituisce le ripetizioni minime per la tara (tratto dallo pseudocodice del professore Alberto Policriti)
-     * (affinchè la si possa misurare con l'orologio di sistema)
+     * Restituisce il numero di ripetizioni necessarie per calcolare il tempo di tara. (affinchè la si possa misurare con l'orologio di sistema)
+     * (tratto dallo pseudocodice del professore Alberto Policriti)
      * @param tMin rappresenta la durata minima che le ripetizioni devono assicurare al sistema
-     * @return ripetizioni minime per la tara
+     * @return numero di ripetizioni necessarie per calcolare il tempo di tara
      */
     public int getTaraRip(long tMin){
 

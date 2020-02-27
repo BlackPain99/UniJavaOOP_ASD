@@ -7,7 +7,7 @@ public abstract class Select {
     public abstract String getName();
 
     /**
-     * esegue l'algoritmo vero e proprio
+     * esegue l'algoritmo vero e proprio (esecuzione unitaria dell'algoritmo)
      * calcolo del k-esimo elemento più piccolo in un vettore non ordinato di interi
      * @param input vettore passato all'algoritmo
      * @param k k-esimo elemento più piccolo da cercare nell'array
@@ -17,10 +17,10 @@ public abstract class Select {
 
 
     /**
-     * esegue l'algoritmo, su input passato, rip volte
+     * esegue rip volte l'operazione copy su input e execute su Select
      * @param input rappresentazione di un input vettoriale
      * @param rip indica il numero di volte che bisogna eseguire l'algoritmo
-     * @return tLordo
+     * @return tempo medio per l'esecuzione delle due operazioni
      */
     public double executeTest(Input input, int rip){
 
@@ -36,10 +36,11 @@ public abstract class Select {
     }
 
     /**
-     * calcola ripLordo per l'algoritmo
+     * calcola il numero di ripetizioni lorde necessarie ad eseguire l'operazione copy su Input
+     * e execute su Select affinchè siano dell'ordine di grandezza che ci permetta la misurazione.
      * @param tMin durata minima che le ripetizioni devono assicurare al sistema
      * @param input rappresentazione di un input vettoriale
-     * @return ripLordo
+     * @return numero di ripetizioni lorde necessarie
      */
     public int getRipLordo(long tMin, Input input){
 
