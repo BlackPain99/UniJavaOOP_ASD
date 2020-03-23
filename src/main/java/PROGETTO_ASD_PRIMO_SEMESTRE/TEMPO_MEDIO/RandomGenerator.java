@@ -1,4 +1,4 @@
-package PROGETTO_ASD.TEMPO_MEDIO;
+package PROGETTO_ASD_PRIMO_SEMESTRE.TEMPO_MEDIO;
 
 //classe per generazione numeri casuali (meglio di random)
 public class RandomGenerator {

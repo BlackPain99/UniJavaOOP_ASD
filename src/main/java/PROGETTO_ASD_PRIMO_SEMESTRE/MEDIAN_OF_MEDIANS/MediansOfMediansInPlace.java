@@ -1,23 +1,33 @@
-package PROGETTO_ASD.TEMPO_MEDIO;
+package PROGETTO_ASD_PRIMO_SEMESTRE.MEDIAN_OF_MEDIANS;
 
-public class MediansOfMediansInPlace extends Select {
+import PROGETTO_ASD_PRIMO_SEMESTRE.Input;
 
-    @Override
-    public String getName() {
-        return "MedOfMedInPlace";
+import java.util.ArrayList;
+import java.util.List;
+
+public class MediansOfMediansInPlace {
+
+    public static void main(String[] args) {
+        List<Integer> listItems = new ArrayList<>();
+        int key = Input.InputToList(listItems);
+
+        Integer[] items = new Integer[listItems.size()];
+
+        for (int i = 0; i < listItems.size(); i++){
+            items[i] = listItems.get(i);
+        }
+
+        int result = (Integer) MediansOfMediansInPlace.mediansOfMediansInPlace(items, key-1);
+
+        System.out.println(result);
+
     }
 
-    @Override
-    public int execute(int[] input, int k) {
-        return mediansOfMediansInPlace(input, k);
-    }
-
-
-    static int mediansOfMediansInPlace(int[] nums, int k){
+    public static Comparable mediansOfMediansInPlace(Comparable[] nums, int k){
         return nums[select(nums, 0, nums.length - 1, k)];
     }
 
-    private static int select(int[] nums, int l, int h, int k){
+    private static int select(Comparable[] nums, int l, int h, int k){
 
         while(l < h){
 
@@ -36,7 +46,7 @@ public class MediansOfMediansInPlace extends Select {
         return l;
     }
 
-    private static int pivot(int[] list, int left, int right) {
+    private static int pivot(Comparable[] list, int left, int right) {
 
         // for 5 or less elements just get median
         if (right - left < 5) {
@@ -62,7 +72,7 @@ public class MediansOfMediansInPlace extends Select {
 
     }
 
-    private static int partition5(int[] list, int l, int h) {
+    private static int partition5(Comparable[] list, int l, int h) {
 
         for (int i = l; i <= h; i++) {
             for (int j = i; j > l; j--) {
@@ -76,12 +86,12 @@ public class MediansOfMediansInPlace extends Select {
         return (h + l) / 2;
     }
 
-    private static int partition(int[] a, int l, int h, int pivotIndex){
+    private static int partition(Comparable[] a, int l, int h, int pivotIndex){
 
         exch(a, l, pivotIndex);
         int i = l;
         int j = h + 1;
-        int v = a[l];
+        Comparable v = a[l];
 
         while(true){
             while(less(a[++i], v) && i != h){}
@@ -96,20 +106,23 @@ public class MediansOfMediansInPlace extends Select {
 
     }
 
-    private static void exch(int[] nums, int i, int j){
-        int temp = nums[i];
+    private static void exch(Comparable[] nums, int i, int j){
+        Comparable temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
     }
 
-    private static boolean less(int v, int w){
+    private static boolean less(Comparable v, Comparable w){
 
-        if(v < w){
+        if(v.compareTo(w) < 0){
             return true;
         }
 
         return false;
     }
+
+
+
 
 
 }

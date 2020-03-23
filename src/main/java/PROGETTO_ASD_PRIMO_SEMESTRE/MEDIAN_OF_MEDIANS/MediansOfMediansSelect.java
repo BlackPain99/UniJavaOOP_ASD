@@ -1,6 +1,6 @@
-package PROGETTO_ASD.MEDIAN_OF_MEDIANS;
+package PROGETTO_ASD_PRIMO_SEMESTRE.MEDIAN_OF_MEDIANS;
 
-import PROGETTO_ASD.Input;
+import PROGETTO_ASD_PRIMO_SEMESTRE.Input;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package PROGETTO_ASD;
+package PROGETTO_ASD_PRIMO_SEMESTRE;
 
 class Node2 implements Comparable<Node2>{
 

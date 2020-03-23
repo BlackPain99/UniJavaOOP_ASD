@@ -1,4 +1,4 @@
-package PROGETTO_ASD.TEMPO_MEDIO;
+package PROGETTO_ASD_PRIMO_SEMESTRE.TEMPO_MEDIO;
 
 //rappresentazione di un input vettoriale
 public class Input {
@@ -119,6 +119,7 @@ public class Input {
         return max;
     }
 
-
 }
+
+
 
