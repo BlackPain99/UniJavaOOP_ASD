@@ -99,6 +99,7 @@ public class Bst {
 
         if(x != z){
             z.key = x.key;
+            z.value = x.value;
         }
 
     }

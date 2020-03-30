@@ -1,4 +1,4 @@
-package ESERCIZI_ASD_SECONDO_SEMESTRE.ESERCIZIO_16;
+package ESERCIZI_ASD_SECONDO_SEMESTRE.ESERCIZIO_17;
 
 import java.util.Scanner;
 
@@ -6,13 +6,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Bst bst = new Bst();
+        BstAumentato bstAumentato = new BstAumentato();
 
-        iterativeInput(bst);
+        iterativeInput(bstAumentato);
 
     }
 
-    private static void iterativeInput(Bst bst) {
+    private static void iterativeInput(BstAumentato bst) {
         String s;
         int n;
         Scanner scan = new Scanner(System.in);
@@ -42,7 +42,17 @@ public class Main {
             } else if (s.equals("show")) {
                 bst.show();
                 System.out.println();
+            } else if (s.equals("height")) {
+
+                if(bst.getRoot() == null) {
+                    System.out.println(0);
+                } else {
+                    System.out.println(bst.height());
+                }
+
+
             } else {
+                System.out.println();
                 break;
             }
 
