@@ -13,10 +13,6 @@ class BstAumentato {
 
     private BSTAumentatiNode root;
 
-    public BSTAumentatiNode getRoot() {
-        return root;
-    }
-
     BstAumentato(){
         this.root = null;
     }
@@ -96,7 +92,7 @@ class BstAumentato {
         else
             h2 = right.getHeight();
 
-        return (h1 >= h2)? h1 : h2;
+        return Math.max(h1, h2);
     }
 
     /**
@@ -179,6 +175,7 @@ class BstAumentato {
     private String findTree(BSTAumentatiNode x, int k){
 
         if(x == null || x.getKey() == k){
+            assert x != null;
             return x.getValue();
         } else {
 
@@ -312,11 +309,17 @@ class BstAumentato {
         return isTree(x.getLeft()) && isTree(x.getRight());
     }
 
+
+    /**
+     * altezza dell'albero
+     * @return altezza della radice dell'albero
+     */
     int height(){
+        if(root == null)
+            return 0;
+
         return root.getHeight();
     }
-
-
 
 
 
