@@ -11,17 +11,18 @@ public class AVLTree {
     /**
      * inserisce un nuovo nodo nell'albero AVL con chiave k e valore v.
      * (si assuma che l'albero non contenga già un nodo con chiave k)
+     *
      * @param k chiave di tipo intero
      * @param v valore di tipo stringa
      */
-    void insert(int k, String v){
+    void insert(int k, String v) {
 
         AVLNode z = new AVLNode(k, v);
         AVLNode y = null;
         AVLNode x = root;
 
-        while (x != null){
-            if (x.key > z.key){
+        while (x != null) {
+            if (x.key > z.key) {
                 y = x;
                 x = x.left;
             } else {
@@ -31,13 +32,13 @@ public class AVLTree {
         }
 
         //inserimento in un BST vuoto
-        if(y == null){
+        if (y == null) {
             root = z;
         } else {
 
             z.parent = y;
 
-            if(y.key > z.key){
+            if (y.key > z.key) {
                 y.left = z;
             } else {
                 y.right = z;
@@ -48,27 +49,26 @@ public class AVLTree {
 
             balanceTheTreeAfterInsertion(y);
         }
-
     }
 
     private void balanceTheTreeAfterInsertion(AVLNode y) {
         AVLNode z = firstUnbalancedNode(y);
 
-        if(z == null){
+        if (z == null) {
             return;
         } else {
             int hDiff = getHDiff(z);
 
-            if(hDiff > 1){
+            if (hDiff > 1) {
 
-                if (z.left.left.height < z.left.right.height) {
+                if (height(z.left.left) < height(z.left.right)) {
                     leftRotate(z.left);
                 }
                 rightRotate(z);
 
             } else {
 
-                if (z.right.right.height < z.right.left.height) {
+                if (height(z.right.right) < height(z.right.left)) {
                     rightRotate(z.right);
                 }
                 leftRotate(z);
@@ -80,7 +80,7 @@ public class AVLTree {
 
     private AVLNode firstUnbalancedNode(AVLNode y) {
 
-        if(y == null){
+        if (y == null) {
             return null;
         } else {
             int hDiff = getHDiff(y);
@@ -95,11 +95,12 @@ public class AVLTree {
 
     /**
      * aggiorna le altezze dei nodi a partire dal nodo passato in input fino alla radice
+     *
      * @param y nodo da cui partire per aggiornare le altezze
      */
     private void updateHeights(AVLNode y) {
 
-        while(y != null){
+        while (y != null) {
 
             y.height = maxHeight(y.left, y.right) + 1;
 
@@ -110,19 +111,20 @@ public class AVLTree {
 
     /**
      * determina altezza più lunga tra due nodi in input
-     * @param left primo nodo (figlio sx)
+     *
+     * @param left  primo nodo (figlio sx)
      * @param right secondo nodo (figlio dx)
      * @return l'altezza più lunga
      */
     private int maxHeight(AVLNode left, AVLNode right) {
         int h1, h2;
 
-        if(left == null)
+        if (left == null)
             h1 = 0;
         else
             h1 = left.height;
 
-        if(right == null)
+        if (right == null)
             h2 = 0;
         else
             h2 = right.height;
@@ -133,13 +135,14 @@ public class AVLTree {
     /**
      * rimuove dall'albero il nodo che contiene la chiave numerica k.
      * (si assuma che tale nodo esista sempre)
+     *
      * @param k chiave di tipo intero
      */
-    void remove(int k){
+    void remove(int k) {
         AVLNode z = findNode(k);
 
         //nodo non trovato
-        if(z == null){
+        if (z == null) {
             return;
         }
 
@@ -147,38 +150,38 @@ public class AVLTree {
     }
 
 
-    private void removeTree(AVLNode z){
+    private void removeTree(AVLNode z) {
 
         //x è il nodo effettivamente da eliminare (può essere il nodo stesso o il suo successore)
         AVLNode x, v;
 
-        if(z.left == null || z.right == null){
+        if (z.left == null || z.right == null) {
             x = z;
         } else {
             x = successor(z);
         }
 
         //determino il figlio di x che lo andrà a sostituire
-        if(x.left != null){
+        if (x.left != null) {
             v = x.left;
         } else {
             v = x.right;
         }
 
         //aggiorno il parent di v al parent di x (ovviamente se v non è null)
-        if(v != null){
+        if (v != null) {
             v.parent = x.parent;
         }
 
         AVLNode parent = x.parent;
 
         //se x è la radice, allora v sarà la nuova radice (il parent è già assegnato a null dall'if precedente)
-        if(x.parent == null){
+        if (x.parent == null) {
             root = v;
         } else {
 
             //adesso mi occupo di aggiornare i puntatori del padre di x
-            if( x == x.parent.left){
+            if (x == x.parent.left) {
                 x.parent.left = v;
             } else {
                 x.parent.right = v;
@@ -186,7 +189,7 @@ public class AVLTree {
 
         }
 
-        if(x != z){
+        if (x != z) {
             z.key = x.key;
             z.value = x.value;
         }
@@ -201,28 +204,34 @@ public class AVLTree {
     private void balanceTheTreeAfterDelete(AVLNode y) {
         AVLNode z = firstUnbalancedNode(y);
 
-        if(z == null){
+        if (z == null) {
             return;
         } else {
             int hDiff = getHDiff(z);
 
-            if(hDiff > 1){
+            int originalHeight = height(z);
 
-                if (z.left.left.height < z.left.right.height) {
+            //left-left case or left-right case
+            if (hDiff > 1) {
+
+                if (height(z.left.left) < height(z.left.right)) {
                     leftRotate(z.left);
                 }
                 rightRotate(z);
 
-            } else {
+            } else { //right-right case or right-left case
 
-                if (z.right.right.height < z.right.left.height) {
+                if (height(z.right.right) < height(z.right.left)) {
                     rightRotate(z.right);
                 }
                 leftRotate(z);
 
             }
 
-            balanceTheTreeAfterDelete(y.parent);
+            if (originalHeight != height(z.parent)) {
+                balanceTheTreeAfterDelete(z.parent.parent);
+            }
+
         }
     }
 
@@ -231,21 +240,22 @@ public class AVLTree {
      * trova nell'albero il nodo con chiave numerica k.
      * (si assuma che tale nodo esista sempre)
      * si appoggia al metodo findTree(BSTNode, int)
+     *
      * @param k chiave di tipo intero
      * @return il valore associato a tale nodo
      */
-    String find(int k){
+    String find(int k) {
         return findTree(root, k);
     }
 
-    private String findTree(AVLNode x, int k){
+    private String findTree(AVLNode x, int k) {
 
-        if(x == null || x.key == k){
+        if (x == null || x.key == k) {
             assert x != null;
             return x.value;
         } else {
 
-            if(k < x.key){
+            if (k < x.key) {
                 return findTree(x.left, k);
             } else {
                 return findTree(x.right, k);
@@ -259,21 +269,22 @@ public class AVLTree {
      * trova nell'albero il nodo con chiave numerica k.
      * (si assuma che tale nodo esista sempre)
      * si appoggia al metodo findTreeNode(BSTNode, int)
+     *
      * @param k chiave di tipo intero
      * @return nodo con chiave k
      */
-    AVLNode findNode(int k){
+    AVLNode findNode(int k) {
         return findTreeNode(root, k);
     }
 
 
-    private AVLNode findTreeNode(AVLNode x, int k){
+    private AVLNode findTreeNode(AVLNode x, int k) {
 
-        if(x == null || x.key == k){
+        if (x == null || x.key == k) {
             return x;
         } else {
 
-            if(k < x.key){
+            if (k < x.key) {
                 return findTreeNode(x.left, k);
             } else {
                 return findTreeNode(x.right, k);
@@ -286,7 +297,7 @@ public class AVLTree {
     /**
      * rimuove tutti i nodi dall'albero, che diventerà vuoto.
      */
-    void clear(){
+    void clear() {
         root = null;
     }
 
@@ -295,13 +306,13 @@ public class AVLTree {
      * Il contenuto di ogni nodo viene rappresentato nel formato "chiave:valore:altezza".
      * Un (sotto-)albero vuoto deve essere rappresentato dalla stringa "NULL".
      */
-    void show(){
+    void show() {
         showTree(root);
     }
 
     private void showTree(AVLNode x) {
 
-        if(x == null){
+        if (x == null) {
             System.out.print("NULL ");
         } else {
             System.out.print(x.key + ":" + x.value + ":" + x.height + " ");
@@ -313,17 +324,18 @@ public class AVLTree {
 
     /**
      * dato un nodo x con chiave k, trova il nodo che contiene la più piccola chiave più grande di k
+     *
      * @param x nodo di cui si vuole conoscere il successore
      * @return il nodo che contiene la più piccola chiave più grande di k
      */
-    AVLNode successor(AVLNode x){
+    AVLNode successor(AVLNode x) {
 
-        if (x.right != null){
+        if (x.right != null) {
             return searchMin(x.right);
         } else {
             AVLNode y = x.parent;
 
-            while (y != null && x != y.left){
+            while (y != null && x != y.left) {
                 x = y;
                 y = x.parent;
             }
@@ -334,11 +346,12 @@ public class AVLTree {
 
     /**
      * trova il nodo con chiave minima
+     *
      * @param x nodo di partenza da cui iniziare a cercare la chiave minima
      * @return il nodo con chiave minima
      */
-    AVLNode searchMin(AVLNode x){
-        if(x == null || x.left == null){
+    AVLNode searchMin(AVLNode x) {
+        if (x == null || x.left == null) {
             return x;
         } else {
             return searchMin(x.left);
@@ -348,27 +361,28 @@ public class AVLTree {
 
     /**
      * controlla la correttezza dei puntatori
+     *
      * @return true se è un albero binario valido, false altrimenti
      */
-    boolean isValid(){
+    boolean isValid() {
         return isTree(root);
     }
 
-    boolean isTree(AVLNode x){
+    boolean isTree(AVLNode x) {
 
-        if(x == null){
+        if (x == null) {
             return true;
         }
 
-        if(x == root && x.parent != null){
+        if (x == root && x.parent != null) {
             return false;
         }
 
-        if(x.left != null && x.left.parent != x){
+        if (x.left != null && x.left.parent != x) {
             return false;
         }
 
-        if(x.right != null && x.right.parent != x){
+        if (x.right != null && x.right.parent != x) {
             return false;
         }
 
@@ -378,32 +392,57 @@ public class AVLTree {
 
     /**
      * altezza dell'albero
+     *
      * @return altezza della radice dell'albero
      */
-    int height(){
-        if(root == null)
+    int height() {
+        if (root == null)
             return 0;
 
         return root.height;
     }
 
+    int height(AVLNode x) {
+
+        if (x == null) {
+            return 0;
+        } else {
+            return x.height;
+        }
+
+    }
+
 
     /**
      * metodo per ruotare a dx un sottoalbero con radice y
+     *
      * @param y radice del sottoalbero da ruotare
      * @return nuova radice
      */
-    AVLNode rightRotate(AVLNode y){
+    AVLNode rightRotate(AVLNode y) {
         AVLNode x = y.left;
         AVLNode T2 = x.right;
 
         //effettuare la rotazione
+        if (y.parent != null) {
+            if (y.parent.left == y) {
+                x.parent = y.parent;
+                x.parent.left = x;
+            } else {
+                x.parent = y.parent;
+                x.parent.right = x;
+            }
+
+        } else {
+            x.parent = null;
+        }
         x.right = y;
+        y.parent = x;
         y.left = T2;
 
         //aggiornare le altezze
-        y.height = Math.max(y.left.height, y.right.height) + 1;
-        x.height = Math.max(x.left.height, x.right.height) + 1;
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
 
         //ritorno la nuova radice
         return x;
@@ -414,17 +453,31 @@ public class AVLTree {
      * @param x radice del sottoalbero da ruotare
      * @return nuova radice
      */
-    AVLNode leftRotate(AVLNode x){
+    AVLNode leftRotate(AVLNode x) {
         AVLNode y = x.right;
         AVLNode T2 = y.left;
 
         //effettuare la rotazione
+        if(x.parent != null){
+            if(x.parent.left == x){
+                y.parent = x.parent;
+                y.parent.left = y;
+            } else {
+                y.parent = x.parent;
+                y.parent.right = y;
+            }
+
+        } else {
+            y.parent = null;
+        }
+
         y.left = x;
         x.right = T2;
+        x.parent = y;
 
         //aggiornare le altezze
-        x.height = Math.max(x.left.height, x.right.height) + 1;
-        y.height = Math.max(y.left.height, y.right.height) + 1;
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
 
         //ritorno la nuova radice
         return y;
@@ -432,21 +485,18 @@ public class AVLTree {
 
     /**
      * calcola di quanto differiscono le altezze dei figli di x
+     *
      * @param x nodo di cui si vuole controllare HDiff
      * @return HDiff per x
      */
-    int getHDiff(AVLNode x){
-        if(x == null)
+    int getHDiff(AVLNode x) {
+        if (x == null) {
             return 0;
+        } else {
+            return height(x.left) - height(x.right);
+        }
 
-        return x.left.height - x.right.height;
     }
-
-
-
-
-
-
 
 
 }
