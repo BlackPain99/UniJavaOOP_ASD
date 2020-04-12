@@ -95,7 +95,7 @@ public class AVLTree {
 
     /**
      * aggiorna le altezze dei nodi a partire dal nodo passato in input fino alla radice
-     *
+     * ATTENZIONE: SI POTREBBE MIGLIORARE VERIFCANDO CHE AD OGNI PASSO ABBIA L'ALTEZZA GIUSTA... SE È COSI SI ESCE DAL LOOP SENZA ANDARE FINO ALLA RADICE
      * @param y nodo da cui partire per aggiornare le altezze
      */
     private void updateHeights(AVLNode y) {
@@ -239,7 +239,7 @@ public class AVLTree {
     /**
      * trova nell'albero il nodo con chiave numerica k.
      * (si assuma che tale nodo esista sempre)
-     * si appoggia al metodo findTree(BSTNode, int)
+     * si appoggia al metodo findTree(AVLNode, int)
      *
      * @param k chiave di tipo intero
      * @return il valore associato a tale nodo
@@ -414,73 +414,78 @@ public class AVLTree {
 
 
     /**
-     * metodo per ruotare a dx un sottoalbero con radice y
+     * metodo per ruotare a dx un sottoalbero con radice x
+     *
+     * @param x radice del sottoalbero da ruotare
+     * @return nuova radice
+     */
+    AVLNode rightRotate(AVLNode x) {
+        AVLNode parent = x.parent;
+        AVLNode y = x.left;
+
+        x.left = y.right;
+
+        if (y.right != null) {
+            y.right.parent = x;
+        }
+
+        if (parent == null) {
+            root = y;
+        } else if (parent.right == x) {
+            parent.right = y;
+        } else if (parent.left == x) {
+            parent.left = y;
+        }
+
+        y.right = x;
+        x.parent = y;
+        y.parent = parent;
+
+        //aggiornare le altezze
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
+
+        updateHeights(parent);
+
+        //ritorno la nuova radice
+        return y;
+    }
+
+    /**
+     * metodo per ruotare a sx un sottoalbero con radice y
      *
      * @param y radice del sottoalbero da ruotare
      * @return nuova radice
      */
-    AVLNode rightRotate(AVLNode y) {
-        AVLNode x = y.left;
-        AVLNode T2 = x.right;
+    AVLNode leftRotate(AVLNode y) {
+        AVLNode parent = y.parent;
+        AVLNode x = y.right;
 
-        //effettuare la rotazione
-        if (y.parent != null) {
-            if (y.parent.left == y) {
-                x.parent = y.parent;
-                x.parent.left = x;
-            } else {
-                x.parent = y.parent;
-                x.parent.right = x;
-            }
+        y.right = x.left;
 
-        } else {
-            x.parent = null;
+        if (x.left != null) {
+            x.left.parent = y;
         }
-        x.right = y;
+
+        if (parent == null) {
+            root = x;
+        } else if (parent.right == y) {
+            parent.right = x;
+        } else if (parent.left == y) {
+            parent.left = x;
+        }
+
+        x.left = y;
         y.parent = x;
-        y.left = T2;
+        x.parent = parent;
 
         //aggiornare le altezze
         y.height = Math.max(height(y.left), height(y.right)) + 1;
         x.height = Math.max(height(x.left), height(x.right)) + 1;
 
+        updateHeights(parent);
         //ritorno la nuova radice
         return x;
-    }
-
-    /**
-     * metodo per ruotare a sx un sottoalbero con radice x
-     * @param x radice del sottoalbero da ruotare
-     * @return nuova radice
-     */
-    AVLNode leftRotate(AVLNode x) {
-        AVLNode y = x.right;
-        AVLNode T2 = y.left;
-
-        //effettuare la rotazione
-        if(x.parent != null){
-            if(x.parent.left == x){
-                y.parent = x.parent;
-                y.parent.left = y;
-            } else {
-                y.parent = x.parent;
-                y.parent.right = y;
-            }
-
-        } else {
-            y.parent = null;
-        }
-
-        y.left = x;
-        x.right = T2;
-        x.parent = y;
-
-        //aggiornare le altezze
-        x.height = Math.max(height(x.left), height(x.right)) + 1;
-        y.height = Math.max(height(y.left), height(y.right)) + 1;
-
-        //ritorno la nuova radice
-        return y;
     }
 
     /**

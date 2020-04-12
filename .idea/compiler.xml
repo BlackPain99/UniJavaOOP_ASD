@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="UniJavaOOP_ASD" />
         <module name="Università" />
+        <module name="Universita" />
       </profile>
     </annotationProcessing>
   </component>
