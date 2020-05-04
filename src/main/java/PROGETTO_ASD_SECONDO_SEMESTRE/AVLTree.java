@@ -1,6 +1,6 @@
-package ESERCIZI_ASD_SECONDO_SEMESTRE.ESERCIZIO_18;
+package PROGETTO_ASD_SECONDO_SEMESTRE;
 
-public class AVLTree {
+class AVLTree {
 
     AVLNode root;
 
@@ -132,108 +132,7 @@ public class AVLTree {
         return Math.max(h1, h2);
     }
 
-    /**
-     * rimuove dall'albero il nodo che contiene la chiave numerica k.
-     * (si assuma che tale nodo esista sempre)
-     *
-     * @param k chiave di tipo intero
-     */
-    void remove(int k) {
-        AVLNode z = findNode(k);
 
-        //nodo non trovato
-        if (z == null) {
-            return;
-        }
-
-        removeTree(z);
-    }
-
-
-    private void removeTree(AVLNode z) {
-
-        //x è il nodo effettivamente da eliminare (può essere il nodo stesso o il suo successore)
-        AVLNode x, v;
-
-        if (z.left == null || z.right == null) {
-            x = z;
-        } else {
-            x = successor(z);
-        }
-
-        //determino il figlio di x che lo andrà a sostituire
-        if (x.left != null) {
-            v = x.left;
-        } else {
-            v = x.right;
-        }
-
-        //aggiorno il parent di v al parent di x (ovviamente se v non è null)
-        if (v != null) {
-            v.parent = x.parent;
-        }
-
-        AVLNode parent = x.parent;
-
-        //se x è la radice, allora v sarà la nuova radice (il parent è già assegnato a null dall'if precedente)
-        if (x.parent == null) {
-            root = v;
-        } else {
-
-            //adesso mi occupo di aggiornare i puntatori del padre di x
-            if (x == x.parent.left) {
-                x.parent.left = v;
-            } else {
-                x.parent.right = v;
-            }
-
-        }
-
-        if (x != z) {
-            z.key = x.key;
-            z.value = x.value;
-        }
-
-        updateHeights(parent);
-
-        balanceTheTreeAfterDelete(parent);
-
-
-    }
-
-    private void balanceTheTreeAfterDelete(AVLNode y) {
-        AVLNode z = firstUnbalancedNode(y);
-
-        if (z == null) {
-            return;
-        } else {
-            int hDiff = getHDiff(z);
-
-            int originalHeight = height(z);
-
-            //left-left case or left-right case
-            if (hDiff > 1) {
-
-                if (height(z.left.left) < height(z.left.right)) {
-                    leftRotate(z.left);
-                }
-                rightRotate(z);
-
-            } else { //right-right case or right-left case
-
-                if (height(z.right.right) < height(z.right.left)) {
-                    rightRotate(z.right);
-                }
-                leftRotate(z);
-
-            }
-
-            if (originalHeight != height(z.parent)) {
-                balanceTheTreeAfterDelete(z.parent.parent);
-            }
-
-        }
-    }
 
 
     /**
@@ -360,37 +259,6 @@ public class AVLTree {
     }
 
     /**
-     * controlla la correttezza dei puntatori
-     *
-     * @return true se è un albero binario valido, false altrimenti
-     */
-    boolean isValid() {
-        return isTree(root);
-    }
-
-    boolean isTree(AVLNode x) {
-
-        if (x == null) {
-            return true;
-        }
-
-        if (x == root && x.parent != null) {
-            return false;
-        }
-
-        if (x.left != null && x.left.parent != x) {
-            return false;
-        }
-
-        if (x.right != null && x.right.parent != x) {
-            return false;
-        }
-
-        return isTree(x.left) && isTree(x.right);
-    }
-
-
-    /**
      * altezza dell'albero
      *
      * @return altezza della radice dell'albero
@@ -497,6 +365,4 @@ public class AVLTree {
         }
 
     }
-
-
 }
